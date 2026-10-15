@@ -1,6 +1,7 @@
 package academy.cashbackmerge.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -102,5 +103,24 @@ public final class Board {
             throw new IndexOutOfBoundsException("Position " + p + " is outside " + rows + "x" + cols + " board");
         }
         return p.row() * cols + p.col();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Board other)) {
+            return false;
+        }
+        return rows == other.rows && cols == other.cols && Arrays.equals(cells, other.cells);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Integer.hashCode(rows);
+        result = 31 * result + Integer.hashCode(cols);
+        result = 31 * result + Arrays.hashCode(cells);
+        return result;
     }
 }
