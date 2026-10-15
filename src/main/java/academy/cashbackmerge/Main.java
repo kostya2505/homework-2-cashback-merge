@@ -36,14 +36,14 @@ public final class Main {
         RandomGenerator random = new Random(parsed.seed());
         GameState state = GameFactory.createInitial(config, random);
 
-        System.out.println(" ÓÌÙË„: " + parsed.configPath());
-        System.out.println("—Ë‰: " + parsed.seed());
-        System.out.println("œÓÎÂ " + config.rows() + "x" + config.cols() + ", movesLimit=" + config.movesLimit());
+        System.out.println("–ö–æ–Ω—Ñ–∏–≥: " + parsed.configPath());
+        System.out.println("–°–∏–¥: " + parsed.seed());
+        System.out.println("–ü–æ–ª–µ " + config.rows() + "x" + config.cols() + ", movesLimit=" + config.movesLimit());
         System.out.println();
         System.out.println(new BoardRenderer().render(state.board()));
         System.out.println();
-        System.out.println("’Ó‰Ó‚ ÓÒÚ‡ÎÓÒ¸: " + state.movesRemaining());
-        System.out.println("—˜∏Ú: " + state.score());
+        System.out.println("–•–æ–¥–æ–≤ –æ—Å—Ç–∞–ª–æ—Å—å: " + state.movesRemaining());
+        System.out.println("–°—á—ë—Ç: " + state.score());
     }
 
     /** Represents command-line arguments. */
@@ -66,19 +66,19 @@ public final class Main {
                 switch (flag) {
                     case "--config" -> {
                         if (i + 1 >= args.length) {
-                            throw new IllegalArgumentException("--config ÚÂ·ÛÂÚ Á‡Ì˜ÂÌËˇ");
+                            throw new IllegalArgumentException("--config —Ç—Ä–µ–±—É–µ—Ç –∑–∞–Ω—á–µ–Ω–∏—è");
                         }
                         configPath = Path.of(args[i + 1]);
                         i += 2;
                     }
                     case "--seed" -> {
                         if (i + 1 >= args.length) {
-                            throw new IllegalArgumentException("--seed ÚÂ·ÛÂÚ ÁÌ‡˜ÂÌËˇ");
+                            throw new IllegalArgumentException("--seed —Ç—Ä–µ–±—É–µ—Ç –∑–Ω–∞—á–µ–Ω–∏—è");
                         }
                         seed = Long.parseLong(args[i + 1]);
                         i += 2;
                     }
-                    default -> throw new IllegalArgumentException("ÕÂËÁ‚ÂÒÚÌ˚È ‡„ÛÏÂÌÚ: " + flag);
+                    default -> throw new IllegalArgumentException("–ù–µ–∏–∑–≤–µ—Å—Ç–Ω—ã–π –∞—Ä–≥—É–º–µ–Ω—Ç: " + flag);
                 }
             }
             return new Args(configPath, seed);

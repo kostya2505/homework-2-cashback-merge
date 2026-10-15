@@ -17,7 +17,8 @@ public record GameState(Board board, int movesRemaining, long score) {
     public GameState {
         Objects.requireNonNull(board, "board");
         if (movesRemaining < 0) {
-            throw new IllegalArgumentException("Оставшееся количество ходов не может быть отрицательным: " + movesRemaining);
+            throw new IllegalArgumentException(
+                    "Оставшееся количество ходов не может быть отрицательным: " + movesRemaining);
         }
     }
 
