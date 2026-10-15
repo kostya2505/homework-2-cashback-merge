@@ -19,7 +19,7 @@ public record GameConfig(int rows, int cols, int movesLimit, List<SpawnRule> spa
         }
         if (sum != Probability.SCALE) {
             throw new ConfigValidationException("Spawn rule probabilities must sum to 1.0, got units=" + sum
-                + " (scale=" + Probability.SCALE + ")");
+                    + " (scale=" + Probability.SCALE + ")");
         }
     }
 }

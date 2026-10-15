@@ -23,8 +23,7 @@ public final class JsonConfigLoader implements ConfigLoader {
         }
         try {
             JsonNode root = mapper.readTree(path.toFile());
-            int rows = requireInt(root, "rows");
-            int cols = requireInt(root, "cols");
+            int boardSize = requireInt(root, "boardSize");
             int movesLimit = requireInt(root, "movesLimit");
 
             JsonNode rulesNode = root.get("spawnRules");
@@ -36,7 +35,7 @@ public final class JsonConfigLoader implements ConfigLoader {
             for (JsonNode rule : rulesNode) {
                 rules.add(parseRule(rule));
             }
-            return new GameConfig(rows, cols, movesLimit, rules);
+            return new GameConfig(boardSize, boardSize, movesLimit, rules);
         } catch (IOException e) {
             throw new ConfigValidationException("Failed to read config file: " + path, e);
         }

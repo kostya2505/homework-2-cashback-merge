@@ -13,7 +13,7 @@ import java.util.random.RandomGenerator;
 /** Точка входа в Cashback Merge. */
 public final class Main {
 
-    private static final String DEFAULT_CONFIG = "config/campaign.json";
+    private static final String DEFAULT_CONFIG = "config/campaign.example.json";
     private static final long DEFAULT_SEED = 42L;
 
     private Main() {}

@@ -6,7 +6,6 @@ import academy.cashbackmerge.domain.Position;
 import academy.cashbackmerge.domain.Tile;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 import java.util.random.RandomGenerator;
 
 public final class WeightedSpawner {
@@ -38,7 +37,7 @@ public final class WeightedSpawner {
         if (empties.isEmpty()) {
             return board;
         }
-        Position position = empties.get(new Random().nextInt(empties.size()));
+        Position position = empties.get(random.nextInt(empties.size()));
         return board.withTile(position, choose(random));
     }
 
