@@ -3,6 +3,7 @@ package academy.cashbackmerge.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /** Represents the game board with a grid of tiles. */
@@ -42,6 +43,35 @@ public final class Board {
         this.rows = rows;
         this.cols = cols;
         this.cells = cells;
+    }
+
+    public static Board of(int[][] rows) {
+        Objects.requireNonNull(rows, "rows");
+        if (rows.length == 0) {
+            throw new IllegalArgumentException("На поле должен быть хотя бы один ряд");
+        }
+        int cols = rows[0].length;
+        if (cols == 0) {
+            throw new IllegalArgumentException("На поле должен быть хотя бы один столбец");
+        }
+        for (int r = 1; r < rows.length; r++) {
+            if (rows[r].length != cols) {
+                throw new IllegalArgumentException("В ряду " + r + " " + rows[r].length + " стобцов, ожидалось " + cols);
+            }
+        }
+        Board board = new Board(rows.length, cols);
+        for (int r = 0; r < rows.length; r++) {
+            for (int c = 0; c < cols; c++) {
+                int v = rows[r][c];
+                if (v < 0) {
+                    throw new IllegalArgumentException("Отрицательное значение в клетке (" + r + ", " + c + "): " + v);
+                }
+                if (v != 0) {
+                    board = board.withTile(new Position(r, c), Tile.ofPercent(v));
+                }
+            }
+        }
+        return board;
     }
 
     /**
