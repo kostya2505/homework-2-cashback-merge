@@ -66,7 +66,7 @@ public final class Main {
                 switch (flag) {
                     case "--config" -> {
                         if (i + 1 >= args.length) {
-                            throw new IllegalArgumentException("--config требует занчения");
+                            throw new IllegalArgumentException("--config требует значения");
                         }
                         configPath = Path.of(args[i + 1]);
                         i += 2;
