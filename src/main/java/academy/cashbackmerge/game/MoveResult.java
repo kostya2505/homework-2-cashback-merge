@@ -3,9 +3,7 @@ package academy.cashbackmerge.game;
 import academy.cashbackmerge.domain.GameState;
 import java.util.Objects;
 
-/**
- * Represents the result of a move in the game.
- */
+/** Represents the result of a move in the game. */
 public record MoveResult(GameState state, boolean changed, long scoreGained) {
 
     /**
@@ -14,7 +12,8 @@ public record MoveResult(GameState state, boolean changed, long scoreGained) {
      * @param state the current game state
      * @param changed indicates whether the move changed the game state
      * @param scoreGained the score gained from the move
-     * @throws IllegalArgumentException if the state is null, scoreGained is negative, and changed is false while scoreGained is non-zero
+     * @throws IllegalArgumentException if the state is null, scoreGained is negative, and changed is false while
+     *     scoreGained is non-zero
      */
     public MoveResult {
         Objects.requireNonNull(state, "state");

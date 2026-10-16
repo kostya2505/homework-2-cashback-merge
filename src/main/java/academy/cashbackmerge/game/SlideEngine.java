@@ -6,14 +6,10 @@ import academy.cashbackmerge.domain.Position;
 import academy.cashbackmerge.domain.Tile;
 import java.util.Arrays;
 
-/**
- * Engine for applying moves to the game board.
- */
+/** Engine for applying moves to the game board. */
 public final class SlideEngine {
 
-    /**
-     * Private constructor to prevent instantiation.
-     */
+    /** Private constructor to prevent instantiation. */
     private SlideEngine() {}
 
     /**
@@ -150,8 +146,6 @@ public final class SlideEngine {
         return new MergedLine(mergedValues, score);
     }
 
-    /**
-     * Represents the result of merging a line.
-     */
+    /** Represents the result of merging a line. */
     private record MergedLine(int[] values, long score) {}
 }

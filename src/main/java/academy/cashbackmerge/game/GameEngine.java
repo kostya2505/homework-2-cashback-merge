@@ -8,9 +8,7 @@ import academy.cashbackmerge.spawn.WeightedSpawner;
 import java.util.Objects;
 import java.util.random.RandomGenerator;
 
-/**
- * Engine for managing the game state and applying moves.
- */
+/** Engine for managing the game state and applying moves. */
 public final class GameEngine {
 
     private final GameConfig config;
