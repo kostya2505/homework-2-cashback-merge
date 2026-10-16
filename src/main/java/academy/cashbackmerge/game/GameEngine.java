@@ -5,7 +5,6 @@ import academy.cashbackmerge.domain.Board;
 import academy.cashbackmerge.domain.Direction;
 import academy.cashbackmerge.domain.GameState;
 import academy.cashbackmerge.spawn.WeightedSpawner;
-
 import java.util.Objects;
 import java.util.random.RandomGenerator;
 

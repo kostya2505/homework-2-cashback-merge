@@ -1,7 +1,6 @@
 package academy.cashbackmerge.game;
 
 import academy.cashbackmerge.domain.GameState;
-
 import java.util.Objects;
 
 public record MoveResult(GameState state, boolean changed, long scoreGained) {

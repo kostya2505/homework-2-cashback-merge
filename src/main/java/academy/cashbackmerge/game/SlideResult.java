@@ -1,7 +1,6 @@
 package academy.cashbackmerge.game;
 
 import academy.cashbackmerge.domain.Board;
-
 import java.util.Objects;
 
 public record SlideResult(Board board, long scoreGained, boolean changed) {

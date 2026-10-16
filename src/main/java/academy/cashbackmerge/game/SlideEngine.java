@@ -4,7 +4,6 @@ import academy.cashbackmerge.domain.Board;
 import academy.cashbackmerge.domain.Direction;
 import academy.cashbackmerge.domain.Position;
 import academy.cashbackmerge.domain.Tile;
-
 import java.util.Arrays;
 
 public final class SlideEngine {
@@ -31,8 +30,8 @@ public final class SlideEngine {
                 Position position = cellAt(board, direction, lineIndex, indexInLine);
                 int value = mergedValues[indexInLine];
                 updatedBoard = value == 0
-                    ? updatedBoard.withoutTile(position)
-                    : updatedBoard.withTile(position, Tile.ofPercent(value));
+                        ? updatedBoard.withoutTile(position)
+                        : updatedBoard.withTile(position, Tile.ofPercent(value));
             }
             scoreGained += mergedLine.score();
         }
@@ -58,17 +57,18 @@ public final class SlideEngine {
         int[] values = new int[lengthOfLine];
         for (int indexInLine = 0; indexInLine < lengthOfLine; indexInLine++) {
             Position position = cellAt(board, direction, lineIndex, indexInLine);
-            values[indexInLine] = board.tileAt(position).map(Tile::cashbackPercent).orElse(0);
+            values[indexInLine] =
+                    board.tileAt(position).map(Tile::cashbackPercent).orElse(0);
         }
         return values;
     }
 
     private static Position cellAt(Board board, Direction direction, int lineIndex, int indexInLine) {
         return switch (direction) {
-            case LEFT  -> new Position(lineIndex, indexInLine);
+            case LEFT -> new Position(lineIndex, indexInLine);
             case RIGHT -> new Position(lineIndex, board.cols() - 1 - indexInLine);
-            case UP    -> new Position(indexInLine, lineIndex);
-            case DOWN  -> new Position(board.rows() - 1 - indexInLine, lineIndex);
+            case UP -> new Position(indexInLine, lineIndex);
+            case DOWN -> new Position(board.rows() - 1 - indexInLine, lineIndex);
         };
     }
 

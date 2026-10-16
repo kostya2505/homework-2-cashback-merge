@@ -56,7 +56,8 @@ public final class Board {
         }
         for (int r = 1; r < rows.length; r++) {
             if (rows[r].length != cols) {
-                throw new IllegalArgumentException("В ряду " + r + " " + rows[r].length + " стобцов, ожидалось " + cols);
+                throw new IllegalArgumentException(
+                        "В ряду " + r + " " + rows[r].length + " стобцов, ожидалось " + cols);
             }
         }
         Board board = new Board(rows.length, cols);
