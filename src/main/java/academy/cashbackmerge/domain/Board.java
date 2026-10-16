@@ -45,6 +45,14 @@ public final class Board {
         this.cells = cells;
     }
 
+    /**
+     * Creates a new Board instance from a 2D array of tile values.
+     *
+     * @param rows the 2D array of tile values
+     * @return a new Board instance initialized with the given tile values
+     * @throws IllegalArgumentException if the rows array is null, empty, or if the number of columns varies between rows
+     * @throws IllegalArgumentException if any value in the rows array is negative
+     */
     public static Board of(int[][] rows) {
         Objects.requireNonNull(rows, "rows");
         if (rows.length == 0) {

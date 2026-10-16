@@ -6,10 +6,23 @@ import academy.cashbackmerge.domain.Position;
 import academy.cashbackmerge.domain.Tile;
 import java.util.Arrays;
 
+/**
+ * Engine for applying moves to the game board.
+ */
 public final class SlideEngine {
 
+    /**
+     * Private constructor to prevent instantiation.
+     */
     private SlideEngine() {}
 
+    /**
+     * Applies a move to the game board in the specified direction.
+     *
+     * @param board the game board to apply the move to
+     * @param direction the direction of the move
+     * @return the result of the move
+     */
     public static SlideResult apply(Board board, Direction direction) {
         int linesToProcess = lineCount(board, direction);
         int lengthOfEachLine = lineLength(board, direction);
@@ -38,6 +51,13 @@ public final class SlideEngine {
         return new SlideResult(updatedBoard, scoreGained, changed);
     }
 
+    /**
+     * Calculates the number of lines to process for a given direction.
+     *
+     * @param board the game board
+     * @param direction the direction of the move
+     * @return the number of lines to process
+     */
     private static int lineCount(Board board, Direction direction) {
         return switch (direction) {
             case LEFT, RIGHT -> board.rows();
@@ -45,6 +65,13 @@ public final class SlideEngine {
         };
     }
 
+    /**
+     * Calculates the length of each line for a given direction.
+     *
+     * @param board the game board
+     * @param direction the direction of the move
+     * @return the length of each line
+     */
     private static int lineLength(Board board, Direction direction) {
         return switch (direction) {
             case LEFT, RIGHT -> board.cols();
@@ -52,6 +79,14 @@ public final class SlideEngine {
         };
     }
 
+    /**
+     * Reads a line from the board for a given direction.
+     *
+     * @param board the game board
+     * @param direction the direction of the move
+     * @param lineIndex the index of the line to read
+     * @return the values of the line
+     */
     private static int[] readLine(Board board, Direction direction, int lineIndex) {
         int lengthOfLine = lineLength(board, direction);
         int[] values = new int[lengthOfLine];
@@ -63,6 +98,15 @@ public final class SlideEngine {
         return values;
     }
 
+    /**
+     * Determines the cell position for a given line index and index in line.
+     *
+     * @param board the game board
+     * @param direction the direction of the move
+     * @param lineIndex the index of the line
+     * @param indexInLine the index within the line
+     * @return the position of the cell
+     */
     private static Position cellAt(Board board, Direction direction, int lineIndex, int indexInLine) {
         return switch (direction) {
             case LEFT -> new Position(lineIndex, indexInLine);
@@ -72,6 +116,12 @@ public final class SlideEngine {
         };
     }
 
+    /**
+     * Merges a line by combining tiles with the same value.
+     *
+     * @param originalLine the original line of tiles
+     * @return the result of merging the line
+     */
     private static MergedLine mergeLine(int[] originalLine) {
         int lengthOfLine = originalLine.length;
         int[] compactedValues = new int[lengthOfLine];
@@ -100,5 +150,8 @@ public final class SlideEngine {
         return new MergedLine(mergedValues, score);
     }
 
+    /**
+     * Represents the result of merging a line.
+     */
     private record MergedLine(int[] values, long score) {}
 }
