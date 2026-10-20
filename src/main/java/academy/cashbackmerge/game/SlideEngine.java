@@ -133,7 +133,9 @@ public final class SlideEngine {
         long score = 0L;
         int readIndex = 0;
         while (readIndex < compactedCount) {
-            if (readIndex + 1 < compactedCount && compactedValues[readIndex] == compactedValues[readIndex + 1]) {
+            if (readIndex + 1 < compactedCount
+                    && compactedValues[readIndex] == compactedValues[readIndex + 1]
+                    && compactedValues[readIndex] <= Tile.MAX_MERGEABLE_CASHBACK) {
                 int mergedValue = compactedValues[readIndex] * 2;
                 mergedValues[writeIndex++] = mergedValue;
                 score += mergedValue;

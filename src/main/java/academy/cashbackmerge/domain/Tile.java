@@ -5,6 +5,10 @@ import org.jspecify.annotations.NonNull;
 /** Represents a tile on the game board with a specific cashback percentage. */
 public record Tile(int cashbackPercent) implements Comparable<Tile> {
 
+    public static final int MAX_CASHBACK = 32;
+
+    public static final int MAX_MERGEABLE_CASHBACK = MAX_CASHBACK / 2;
+
     /**
      * Constructs a new Tile instance.
      *
@@ -14,6 +18,10 @@ public record Tile(int cashbackPercent) implements Comparable<Tile> {
     public Tile {
         if (cashbackPercent <= 0) {
             throw new IllegalArgumentException("Процент кэшбэка должен быть положительным: " + cashbackPercent);
+        }
+        if (cashbackPercent > MAX_CASHBACK) {
+            throw new IllegalArgumentException(
+                    "Процент кэшбэка должен быть не больше " + MAX_CASHBACK + ": " + cashbackPercent);
         }
     }
 
@@ -34,7 +42,9 @@ public record Tile(int cashbackPercent) implements Comparable<Tile> {
      * @return true if this tile can merge with the other tile, false otherwise
      */
     public boolean canMergeWith(Tile other) {
-        return other != null && other.cashbackPercent == this.cashbackPercent;
+        return other != null
+                && other.cashbackPercent == this.cashbackPercent
+                && this.cashbackPercent <= MAX_MERGEABLE_CASHBACK;
     }
 
     /**

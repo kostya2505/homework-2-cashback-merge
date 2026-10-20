@@ -29,26 +29,30 @@ public final class JsonConfigLoader implements ConfigLoader {
     @Override
     public GameConfig load(Path path) {
         if (!Files.isRegularFile(path)) {
-            throw new ConfigValidationException("Config file not found: " + path);
+            throw new ConfigValidationException("Конфиг не найден: " + path);
         }
         try {
             JsonNode root = mapper.readTree(path.toFile());
-            int boardSize = requireInt(root, "boardSize");
-            int movesLimit = requireInt(root, "movesLimit");
-
-            JsonNode rulesNode = root.get("spawnRules");
-            if (rulesNode == null || !rulesNode.isArray() || rulesNode.isEmpty()) {
-                throw new ConfigValidationException("spawnRules must be a non-empty array");
-            }
-
-            List<SpawnRule> rules = new ArrayList<>(rulesNode.size());
-            for (JsonNode rule : rulesNode) {
-                rules.add(parseRule(rule));
-            }
-            return new GameConfig(boardSize, boardSize, movesLimit, rules);
+            return loadFromNode(root);
         } catch (IOException e) {
-            throw new ConfigValidationException("Failed to read config file: " + path, e);
+            throw new ConfigValidationException("Не получилось прочитать конфиг: " + path, e);
         }
+    }
+
+    public GameConfig loadFromNode(JsonNode root) {
+        int boardSize = requireInt(root, "boardSize");
+        int movesLimit = requireInt(root, "movesLimit");
+
+        JsonNode rulesNode = root.get("spawnRules");
+        if (rulesNode == null || !rulesNode.isArray() || rulesNode.isEmpty()) {
+            throw new ConfigValidationException("Правила появления должны быть непустым списком");
+        }
+
+        List<SpawnRule> rules = new ArrayList<>(rulesNode.size());
+        for (JsonNode rule : rulesNode) {
+            rules.add(parseRule(rule));
+        }
+        return new GameConfig(boardSize, boardSize, movesLimit, rules);
     }
 
     /**
