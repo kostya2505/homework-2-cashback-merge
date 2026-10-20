@@ -2,17 +2,21 @@ package academy.cashbackmerge.mandatory.mr1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.fail;
 
+import academy.cashbackmerge.config.CampaignConfig;
 import academy.cashbackmerge.config.GameConfig;
+import academy.cashbackmerge.config.JsonCampaignLoader;
 import academy.cashbackmerge.config.Probability;
 import academy.cashbackmerge.config.SpawnRule;
 import academy.cashbackmerge.domain.GameState;
 import academy.cashbackmerge.domain.Tile;
 import academy.cashbackmerge.game.GameFactory;
+import academy.cashbackmerge.report.MarkdownReportWriter;
+import academy.cashbackmerge.simulation.SimulationResult;
+import academy.cashbackmerge.simulation.SimulationRunner;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Random;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -49,9 +53,19 @@ class SeedTest {
     }
 
     @Test
-    @Disabled("MR3: реализуй тест и удали эту строку")
     @DisplayName("Одинаковый конфиг, seed и стратегия дают одинаковый отчёт симуляции")
     void sameInputsProduceSameSimulationReport() {
-        fail("Тест не реализован");
+        CampaignConfig campaign = new JsonCampaignLoader().load(Path.of("config/campaign.example.json"));
+        SimulationRunner runner = new SimulationRunner(campaign);
+        SimulationResult first = runner.run(100, 42L, "random");
+        SimulationResult second = runner.run(100, 42L, "random");
+        String report1 = new MarkdownReportWriter().render(first);
+        String report2 = new MarkdownReportWriter().render(second);
+        assertEquals(report1, report2);
+        assertEquals(first.meanScore(), second.meanScore());
+        assertEquals(first.maxScore(), second.maxScore());
+        assertEquals(first.actualMaxRewardRate(), second.actualMaxRewardRate());
+        assertEquals(first.status(), second.status());
+        assertEquals(first.maxTileDistribution(), second.maxTileDistribution());
     }
 }

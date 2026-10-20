@@ -2,11 +2,18 @@ package academy.cashbackmerge.mandatory.mr2;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import academy.cashbackmerge.config.GameConfig;
+import academy.cashbackmerge.config.Probability;
+import academy.cashbackmerge.config.SpawnRule;
 import academy.cashbackmerge.domain.Board;
 import academy.cashbackmerge.domain.Direction;
+import academy.cashbackmerge.domain.GameState;
 import academy.cashbackmerge.domain.Position;
 import academy.cashbackmerge.domain.Tile;
+import academy.cashbackmerge.game.GameFactory;
 import academy.cashbackmerge.game.SlideEngine;
+import java.util.List;
+import java.util.Random;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -103,5 +110,16 @@ class MergeRulesTest {
             sb.append(v == 0 ? '.' : String.valueOf(v));
         }
         return sb.toString();
+    }
+
+    @Test
+    @DisplayName("Бонус: 5×5 поле поддерживается")
+    void supports5x5Board() {
+        GameConfig config =
+                new GameConfig(5, 5, 100, List.of(new SpawnRule(Tile.ofPercent(1), Probability.parse("1.0"))));
+        GameState state = GameFactory.createInitial(config, new Random(42L));
+        assertThat(state.board().rows()).isEqualTo(5);
+        assertThat(state.board().cols()).isEqualTo(5);
+        assertThat(state.board().tiles()).hasSize(2);
     }
 }
