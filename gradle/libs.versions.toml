@@ -29,7 +29,7 @@ wiremock = "3.13.2"
 
 # Префикс plugin- обязателен: имя `errorprone` уже занято версией инструмента выше.
 plugin-spotless = "8.10.0"
-plugin-errorprone = "5.1.0"
+plugin-errorprone = "5.1.1"
 
 [libraries]
 # BOM согласует версии артефактов одного семейства.
