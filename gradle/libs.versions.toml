@@ -28,7 +28,7 @@ mockito = "5.23.0"
 wiremock = "3.13.2"
 
 # Префикс plugin- обязателен: имя `errorprone` уже занято версией инструмента выше.
-plugin-spotless = "8.10.0"
+plugin-spotless = "8.10.4"
 plugin-errorprone = "5.1.0"
 
 [libraries]
